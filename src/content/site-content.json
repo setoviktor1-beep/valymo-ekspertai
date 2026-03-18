@@ -1,0 +1,92 @@
+{
+  "seo": {
+    "title": "Valymo Ekspertai Vilniuje | Butų, namų ir biurų valymas",
+    "description": "Profesionalios valymo paslaugos Vilniuje: butų, namų, biurų ir po remonto valymas. Greitas atsakymas, aiškios kainos ir patyrusi komanda.",
+    "keywords": [
+      "valymo paslaugos Vilniuje",
+      "butų valymas",
+      "biurų valymas",
+      "po remonto valymas",
+      "namų valymas"
+    ]
+  },
+  "company": {
+    "name": "Valymo Ekspertai",
+    "phone": "+37060958229",
+    "displayPhone": "+370 609 58229",
+    "city": "Vilnius",
+    "address": "Vilnius, Lietuva",
+    "serviceArea": "Vilnius ir aplinkiniai rajonai"
+  },
+  "hero": {
+    "badge": "Profesionalus valymas Vilniuje",
+    "title": "Mėgaukitės švara be jokių rūpesčių",
+    "highlight": "švara",
+    "description": "Atliekame butų, namų, biurų ir po remonto valymą. Dirbame kruopščiai, punktualiai ir naudojame saugias priemones.",
+    "primaryCta": "Užsakyti valymą",
+    "secondaryCta": "Peržiūrėti kainas",
+    "image": "/images/hero-clean.png"
+  },
+  "benefits": [
+    "Garantuota kokybė",
+    "Saugios valymo priemonės",
+    "Patyrusi komanda"
+  ],
+  "services": [
+    {
+      "title": "Butų valymas",
+      "description": "Reguliarus ir generalinis butų valymas su dėmesiu virtuvei, voniai ir sunkiau pasiekiamoms vietoms."
+    },
+    {
+      "title": "Biurų priežiūra",
+      "description": "Lankstus valymo grafikas biurams ir komercinėms patalpoms, kad darbo aplinka visada išliktų tvarkinga."
+    },
+    {
+      "title": "Po remonto valymas",
+      "description": "Statybinių dulkių, dažų likučių ir kitų nešvarumų šalinimas po remonto darbų."
+    }
+  ],
+  "prices": [
+    {
+      "name": "Buto valymas",
+      "price": "Nuo 55 €",
+      "details": "Kaina priklauso nuo ploto, būklės ir papildomų darbų."
+    },
+    {
+      "name": "Biuro valymas",
+      "price": "Nuo 70 €",
+      "details": "Galimas vienkartinis arba reguliarus valymas."
+    },
+    {
+      "name": "Po remonto",
+      "price": "Nuo 95 €",
+      "details": "Vertiname pagal patalpų plotą ir darbų apimtį."
+    }
+  ],
+  "about": {
+    "title": "Patikima komanda jūsų namams ir verslui",
+    "description": "Dirbame Vilniuje ir orientuojamės į aiškią komunikaciją, tvarkingą procesą ir rezultatą, kurį klientas mato iš karto. Kiekvieną užsakymą planuojame pagal realų poreikį, todėl galime pasiūlyti tiek vienkartinį, tiek periodinį valymą.",
+    "image": "/images/hero-clean.png"
+  },
+  "faq": [
+    {
+      "question": "Ar atsivežate savo priemones?",
+      "answer": "Taip, atsivežame profesionalias valymo priemones ir reikalingą inventorių."
+    },
+    {
+      "question": "Ar galima užsisakyti reguliarų valymą?",
+      "answer": "Taip, galime suderinti savaitinį, kas dvi savaites arba mėnesinį grafiką."
+    },
+    {
+      "question": "Kaip greitai galite atvykti?",
+      "answer": "Dažniausiai pasiūlome laiką per 1-3 darbo dienas, o skubiais atvejais deriname individualiai."
+    }
+  ],
+  "contact": {
+    "title": "Reikia valymo paslaugų Vilniuje?",
+    "description": "Paskambinkite arba parašykite, ir greitai pateiksime pasiūlymą pagal jūsų objektą bei poreikį.",
+    "callLabel": "Skambinti dabar",
+    "hours": "Dirbame I-VII pagal susitarimą"
+  },
+  "updatedAt": "2026-03-18T00:00:00.000Z"
+}
