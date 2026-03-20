@@ -30,6 +30,8 @@ export type SiteContent = {
     city: string;
     address: string;
     serviceArea: string;
+    email: string;
+    facebook: string;
   };
   hero: {
     badge: string;

@@ -369,6 +369,17 @@ export default async function HomePage() {
                   <Phone size={24} />
                   {content.contact.callLabel}
                 </a>
+                <a
+                  href={content.company.facebook}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-2 rounded-2xl bg-[#1877F2] px-8 py-5 text-xl font-black text-white shadow-xl transition hover:-translate-y-1 hover:bg-[#0e65d9]"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.313 0 2.686.236 2.686.236v2.97h-1.514c-1.491 0-1.956.93-1.956 1.884v2.27h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/>
+                  </svg>
+                  Facebook
+                </a>
               </div>
             </div>
             <div className="relative z-10 lg:pl-16">
@@ -385,6 +396,24 @@ export default async function HomePage() {
                   <div>
                     <p className="text-sm font-bold uppercase tracking-widest text-brand-100">Telefonas</p>
                     <p className="mt-2 text-2xl font-bold text-white underline underline-offset-8 decoration-brand-200">{content.company.displayPhone}</p>
+                  </div>
+                  <div>
+                    <p className="text-sm font-bold uppercase tracking-widest text-brand-100">El. paštas</p>
+                    <a href={`mailto:${content.company.email}`} className="mt-2 block text-xl font-bold text-white underline underline-offset-8 decoration-brand-200 break-all">{content.company.email}</a>
+                  </div>
+                  <div>
+                    <p className="text-sm font-bold uppercase tracking-widest text-brand-100">Socialiniai tinklai</p>
+                    <a
+                      href={content.company.facebook}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="mt-2 inline-flex items-center gap-2 rounded-xl bg-[#1877F2] px-4 py-2 text-base font-bold text-white transition hover:bg-[#0e65d9]"
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.313 0 2.686.236 2.686.236v2.97h-1.514c-1.491 0-1.956.93-1.956 1.884v2.27h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/>
+                      </svg>
+                      Valymo Ekspertai
+                    </a>
                   </div>
                 </div>
               </div>
@@ -403,7 +432,18 @@ export default async function HomePage() {
       {/* Footer */}
       <footer className="bg-white py-12 text-center text-sm font-medium text-slate-500">
         <p>© {new Date().getFullYear()} {content.company.name}. Visos teisės saugomos.</p>
-        <div className="mt-4 flex justify-center gap-6">
+        <div className="mt-4 flex justify-center items-center gap-6">
+          <a
+            href={content.company.facebook}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 text-[#1877F2] hover:text-[#0e65d9] font-semibold transition"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.313 0 2.686.236 2.686.236v2.97h-1.514c-1.491 0-1.956.93-1.956 1.884v2.27h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/>
+            </svg>
+            Facebook
+          </a>
           <a href="/admin" className="hover:text-brand-600 hover:underline">Administravimas</a>
         </div>
       </footer>
