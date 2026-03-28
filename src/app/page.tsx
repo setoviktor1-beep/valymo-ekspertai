@@ -325,7 +325,7 @@ export default async function HomePage() {
                 </div>
                 <p className="mt-6 leading-relaxed text-slate-600">{price.details}</p>
                 <div className="mt-8 border-t border-slate-50 pt-8">
-                  <a href={`tel:${content.company.phone}`} className="inline-flex w-full justify-center rounded-2xl bg-warm-50 py-3 font-bold text-slate-900 transition hover:bg-brand-500 hover:text-white">
+                  <a href={`mailto:${content.company.email}`} className="inline-flex w-full justify-center rounded-2xl bg-warm-50 py-3 font-bold text-slate-900 transition hover:bg-brand-500 hover:text-white">
                     Rezervuoti laiką
                   </a>
                 </div>
