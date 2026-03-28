@@ -5,12 +5,10 @@ import Link from "next/link";
 import Image from "next/image";
 import { getSiteContent } from "@/lib/content";
 
-type Props = { params: { slug: string } };
+// Puslapiai renderinami dinamiškai – turinys gaunamas iš Supabase kiekvieną kartą
+export const dynamic = "force-dynamic";
 
-export async function generateStaticParams() {
-  const content = await getSiteContent();
-  return content.services.map((s) => ({ slug: s.slug }));
-}
+type Props = { params: { slug: string } };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const content = await getSiteContent();
