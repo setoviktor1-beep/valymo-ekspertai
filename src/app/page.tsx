@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
 import { ArrowRight, CheckCircle2, Phone, ShieldCheck, Sparkles, Clock, MapPin, Star } from "lucide-react";
 import { JsonLd } from "@/components/JsonLd";
 import { getSiteContent } from "@/lib/content";
@@ -254,9 +255,9 @@ export default async function HomePage() {
                 </div>
                 <h3 className="mt-8 text-2xl font-bold text-slate-900">{service.title}</h3>
                 <p className="mt-4 text-slate-600 leading-relaxed">{service.description}</p>
-                <div className="mt-8 flex items-center gap-2 font-bold text-brand-600 opacity-0 transition-opacity group-hover:opacity-100">
+                <Link href={`/paslaugos/${service.slug}`} className="mt-8 flex items-center gap-2 font-bold text-brand-600 opacity-0 transition-opacity group-hover:opacity-100">
                   Sužinoti daugiau <ArrowRight size={16} />
-                </div>
+                </Link>
               </article>
             ))}
           </div>

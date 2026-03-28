@@ -176,7 +176,7 @@ export function AdminDashboard({ initialContent, logoutAction }: { initialConten
             <div className="flex items-center justify-between mb-6">
               <h2 className="text-2xl font-bold text-slate-900">Paslaugos</h2>
               <button 
-                onClick={() => updateField(["services"], [...content.services, { title: "", description: "" }])}
+                onClick={() => updateField(["services"], [...content.services, { title: "", description: "", slug: "", fullDescription: "", features: [], image: "" }])}
                 className="flex items-center gap-2 rounded-xl bg-brand-100 text-brand-700 px-4 py-2 text-sm font-bold transition hover:bg-brand-200"
               >
                 <Plus size={16} /> Pridėti paslaugą
@@ -193,6 +193,50 @@ export function AdminDashboard({ initialContent, logoutAction }: { initialConten
                 <div className="pr-8">
                   <Input label={`Paslaugos pavadinimas`} path={["services", idx.toString(), "title"]} />
                   <Input label="Paslaugos aprašymas" path={["services", idx.toString(), "description"]} multiline />
+                  <Input label="Pilnas aprašymas (paslaugos puslapyje)" path={["services", idx.toString(), "fullDescription"]} multiline />
+                  <Input label="URL (slug)" path={["services", idx.toString(), "slug"]} />
+                  <ImagePicker label="Paslaugos nuotrauka" path={["services", idx.toString(), "image"]} />
+
+                  {/* Features list */}
+                  <div className="mt-4 border-t border-slate-100 pt-4">
+                    <div className="flex items-center justify-between mb-3">
+                      <span className="text-sm font-semibold text-slate-700">Kas įskaičiuota (sąrašas)</span>
+                      <button
+                        onClick={() => {
+                          const newServices = JSON.parse(JSON.stringify(content.services));
+                          newServices[idx].features = [...(newServices[idx].features || []), ""];
+                          updateField(["services"], newServices);
+                        }}
+                        className="flex items-center gap-1 rounded-lg bg-slate-100 px-3 py-1 text-xs font-bold text-slate-700 transition hover:bg-slate-200"
+                      >
+                        <Plus size={12} /> Pridėti
+                      </button>
+                    </div>
+                    {(content.services[idx].features || []).map((feature: string, fIdx: number) => (
+                      <div key={fIdx} className="flex items-center gap-2 mb-2">
+                        <input
+                          type="text"
+                          value={feature}
+                          onChange={(e) => {
+                            const newServices = JSON.parse(JSON.stringify(content.services));
+                            newServices[idx].features[fIdx] = e.target.value;
+                            updateField(["services"], newServices);
+                          }}
+                          className="flex-1 rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 text-sm outline-none focus:border-brand-500 focus:bg-white"
+                        />
+                        <button
+                          onClick={() => {
+                            const newServices = JSON.parse(JSON.stringify(content.services));
+                            newServices[idx].features = newServices[idx].features.filter((_: string, i: number) => i !== fIdx);
+                            updateField(["services"], newServices);
+                          }}
+                          className="text-slate-400 hover:text-red-500 p-1"
+                        >
+                          <Trash2 size={16} />
+                        </button>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
             ))}

@@ -5,6 +5,10 @@ import { getSupabaseClient, isSupabaseConfigured } from "./supabase";
 export type Service = {
   title: string;
   description: string;
+  slug: string;
+  fullDescription: string;
+  features: string[];
+  image?: string;
 };
 
 export type PriceItem = {
