@@ -147,7 +147,7 @@ export default async function HomePage() {
                 <div className="h-10 w-px bg-slate-200" />
                 <div className="flex flex-col gap-1">
                   <p className="text-lg font-black text-slate-900">300+</p>
-                  <p className="text-sm font-medium text-slate-500">Laimingų klientų</p>
+                  <p className="text-sm font-medium text-slate-500">Patenkintų klientų</p>
                 </div>
               </div>
             </div>
@@ -237,7 +237,7 @@ export default async function HomePage() {
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="text-center">
             <p className="text-sm font-black uppercase tracking-[0.3em] text-brand-600">Paslaugos</p>
-            <h2 className="mt-4 text-4xl font-black tracking-tight text-slate-900 sm:text-5xl">Geriausi sprendimai namams ir verslui</h2>
+            <h2 className="mt-4 text-4xl font-black tracking-tight text-slate-900 sm:text-5xl">Geriausi sprendimai jūsų namams ir verslui</h2>
             <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-slate-600">
               Mūsų komanda užtikrina nepriekaištingą švarą, nesvarbu, ar tai vienkartinis buto valymas, ar nuolatinė biuro priežiūra.
             </p>
@@ -279,7 +279,7 @@ export default async function HomePage() {
               </div>
               <div className="absolute -bottom-8 -right-8 rounded-3xl bg-white p-8 shadow-2xl">
                 <p className="text-4xl font-black text-brand-600">100%</p>
-                <p className="text-sm font-bold text-slate-500 uppercase tracking-wider">Laimingų klientų</p>
+                <p className="text-sm font-bold text-slate-500 uppercase tracking-wider">Patenkintų klientų</p>
               </div>
             </div>
             <div className="order-1 lg:order-2">

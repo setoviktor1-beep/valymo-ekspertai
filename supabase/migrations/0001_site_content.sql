@@ -1,4 +1,29 @@
-{
+-- Sukuria turinio lentelę (viena eilutė visam svetainės turiniui)
+CREATE TABLE IF NOT EXISTS site_content (
+  id INTEGER PRIMARY KEY DEFAULT 1,
+  content JSONB NOT NULL,
+  updated_at TIMESTAMPTZ DEFAULT now(),
+  CONSTRAINT single_row CHECK (id = 1)
+);
+
+-- Sukuria Supabase Storage bucket nuotraukoms (viešas)
+INSERT INTO storage.buckets (id, name, public)
+VALUES ('uploads', 'uploads', true)
+ON CONFLICT (id) DO NOTHING;
+
+-- Leisti visiems autentifikuotiems skaityti ir rašyti į bucket
+CREATE POLICY "Authenticated can upload"
+  ON storage.objects FOR INSERT
+  TO authenticated
+  WITH CHECK (bucket_id = 'uploads');
+
+CREATE POLICY "Public read uploads"
+  ON storage.objects FOR SELECT
+  TO public
+  USING (bucket_id = 'uploads');
+
+-- Pradiniai duomenys iš site-content.json
+INSERT INTO site_content (id, content) VALUES (1, '{
   "seo": {
     "title": "Valymo Ekspertai Vilniuje | Butų, namų ir biurų valymas",
     "description": "Profesionalios valymo paslaugos Vilniuje: butų, namų, biurų ir po remonto valymas. Greitas atsakymas, aiškios kainos ir patyrusi komanda.",
@@ -90,5 +115,6 @@
     "callLabel": "Skambinti dabar",
     "hours": "Dirbame I–VII pagal susitarimą"
   },
-  "updatedAt": "2026-03-18T00:00:00.000Z"
-}
+  "updatedAt": "2026-03-26T00:00:00.000Z"
+}')
+ON CONFLICT (id) DO NOTHING;

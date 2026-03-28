@@ -3,6 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { isAdminAuthenticated } from "@/lib/auth";
 import { updateSiteContent, type SiteContent } from "@/lib/content";
+import { getSupabaseClient, isSupabaseConfigured } from "@/lib/supabase";
 import { writeFile, mkdir } from "node:fs/promises";
 import path from "node:path";
 
@@ -29,11 +30,27 @@ export async function uploadFile(formData: FormData) {
   const bytes = await file.arrayBuffer();
   const buffer = Buffer.from(bytes);
 
-  // Clean filename to be safe
   const filename = `${Date.now()}-${file.name.replace(/[^a-zA-Z0-9.-]/g, "_")}`;
-  const uploadDir = path.join(process.cwd(), "public/uploads");
-  const filePath = path.join(uploadDir, filename);
 
+  if (isSupabaseConfigured()) {
+    const supabase = getSupabaseClient()!;
+    const { error } = await supabase.storage
+      .from("uploads")
+      .upload(filename, buffer, {
+        contentType: file.type,
+        upsert: false
+      });
+
+    if (error) throw new Error(`Nuotraukos įkėlimo klaida: ${error.message}`);
+
+    const { data } = supabase.storage.from("uploads").getPublicUrl(filename);
+    return data.publicUrl;
+  }
+
+  // Fallback: lokalus failų sistema (tik kūrimo aplinkoje)
+  const uploadDir = path.join(process.cwd(), "public/uploads");
+  await mkdir(uploadDir, { recursive: true });
+  const filePath = path.join(uploadDir, filename);
   await writeFile(filePath, buffer);
 
   return `/uploads/${filename}`;

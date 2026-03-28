@@ -1,5 +1,6 @@
 import { promises as fs } from "node:fs";
 import path from "node:path";
+import { getSupabaseClient, isSupabaseConfigured } from "./supabase";
 
 export type Service = {
   title: string;
@@ -62,23 +63,20 @@ export type SiteContent = {
 
 const contentPath = path.join(process.cwd(), "src/content/site-content.json");
 
-function sanitizeLines(value: FormDataEntryValue | null) {
-  return String(value ?? "")
-    .split("\n")
-    .map((line) => line.trim())
-    .filter(Boolean);
-}
-
-function parsePipeList<T>(
-  value: FormDataEntryValue | null,
-  mapLine: (parts: string[]) => T | null
-) {
-  return sanitizeLines(value)
-    .map((line) => mapLine(line.split("|").map((part) => part.trim())))
-    .filter((item): item is T => item !== null);
-}
-
 export async function getSiteContent(): Promise<SiteContent> {
+  if (isSupabaseConfigured()) {
+    const supabase = getSupabaseClient()!;
+    const { data, error } = await supabase
+      .from("site_content")
+      .select("content")
+      .eq("id", 1)
+      .single();
+
+    if (error) throw new Error(`Supabase klaida skaitant turinį: ${error.message}`);
+    return data.content as SiteContent;
+  }
+
+  // Fallback: lokalus JSON failas (tik kūrimo aplinkoje)
   const raw = await fs.readFile(contentPath, "utf8");
   return JSON.parse(raw) as SiteContent;
 }
@@ -89,6 +87,17 @@ export async function updateSiteContent(content: SiteContent): Promise<SiteConte
     updatedAt: new Date().toISOString()
   };
 
+  if (isSupabaseConfigured()) {
+    const supabase = getSupabaseClient()!;
+    const { error } = await supabase
+      .from("site_content")
+      .upsert({ id: 1, content: nextContent, updated_at: new Date().toISOString() });
+
+    if (error) throw new Error(`Supabase klaida išsaugant turinį: ${error.message}`);
+    return nextContent;
+  }
+
+  // Fallback: lokalus JSON failas (tik kūrimo aplinkoje)
   await fs.writeFile(contentPath, `${JSON.stringify(nextContent, null, 2)}\n`, "utf8");
   return nextContent;
 }

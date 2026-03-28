@@ -307,8 +307,10 @@ export function AdminDashboard({ initialContent, logoutAction }: { initialConten
               <Input label="Aptarnavimo zona" path={["company", "serviceArea"]} />
               <Input label="Telefono numeris rodymui" path={["company", "displayPhone"]} />
               <Input label="Telefonas nuorodai" path={["company", "phone"]} />
+              <Input label="El. paštas" path={["company", "email"]} />
+              <Input label="Facebook puslapio nuoroda" path={["company", "facebook"]} />
             </div>
-            
+
             <div className="mt-8 border-t border-slate-200 pt-8">
               <h3 className="text-lg font-bold text-slate-900 mb-4">Kontaktų sekcija apačioje</h3>
               <Input label="Antraštė" path={["contact", "title"]} />
