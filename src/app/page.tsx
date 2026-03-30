@@ -255,7 +255,7 @@ export default async function HomePage() {
                 </div>
                 <h3 className="mt-8 text-2xl font-bold text-slate-900">{service.title}</h3>
                 <p className="mt-4 text-slate-600 leading-relaxed">{service.description}</p>
-                <Link href={`/paslaugos/${service.slug}`} className="mt-8 flex items-center gap-2 font-bold text-brand-600 opacity-0 transition-opacity group-hover:opacity-100">
+                <Link href={`/paslaugos/${service.slug}`} className="mt-8 flex items-center gap-2 font-bold text-brand-600">
                   Sužinoti daugiau <ArrowRight size={16} />
                 </Link>
               </article>
