@@ -4,7 +4,7 @@ import { useState, useRef } from "react";
 import {
   Save, LayoutDashboard, Search, Megaphone, CheckSquare,
   Briefcase, CircleDollarSign, HelpCircle, Building2,
-  Plus, Trash2, CheckCircle2, AlertCircle, Loader2, Image as ImageIcon, Upload, X
+  Plus, Trash2, CheckCircle2, AlertCircle, Loader2, Image as ImageIcon, Upload, X, Menu
 } from "lucide-react";
 import Image from "next/image";
 import type { SiteContent } from "@/lib/content";
@@ -142,6 +142,7 @@ export function AdminDashboard({ initialContent, logoutAction }: { initialConten
   const [content, setContent] = useState<SiteContent>(initialContent);
   const [activeTab, setActiveTab] = useState(TABS[0].id);
   const [status, setStatus] = useState<"idle" | "saving" | "success" | "error">("idle");
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const handleSave = async () => {
     setStatus("saving");
@@ -450,18 +451,32 @@ export function AdminDashboard({ initialContent, logoutAction }: { initialConten
 
   return (
     <div className="flex h-screen bg-slate-50 overflow-hidden text-slate-900 font-sans">
-      <aside className="w-72 bg-white border-r border-slate-200 flex flex-col hidden md:flex">
-        <div className="p-6 border-b border-slate-200">
+      {/* Mobile overlay */}
+      {mobileMenuOpen && (
+        <div
+          className="fixed inset-0 bg-black/40 z-20 md:hidden"
+          onClick={() => setMobileMenuOpen(false)}
+        />
+      )}
+
+      <aside className={`w-72 bg-white border-r border-slate-200 flex flex-col fixed md:static inset-y-0 left-0 z-30 transition-transform duration-300 ${mobileMenuOpen ? "translate-x-0" : "-translate-x-full"} md:translate-x-0`}>
+        <div className="p-6 border-b border-slate-200 flex items-center justify-between">
           <div className="flex items-center gap-2 text-brand-600">
             <Megaphone size={24} />
             <span className="text-xl font-black tracking-tight">TVS Panelė</span>
           </div>
+          <button
+            className="md:hidden text-slate-400 hover:text-slate-700"
+            onClick={() => setMobileMenuOpen(false)}
+          >
+            <X size={20} />
+          </button>
         </div>
         <nav className="flex-1 overflow-y-auto p-4 space-y-1">
           {TABS.map(tab => (
             <button
               key={tab.id}
-              onClick={() => setActiveTab(tab.id)}
+              onClick={() => { setActiveTab(tab.id); setMobileMenuOpen(false); }}
               className={`w-full flex items-center gap-3 px-4 py-3 text-sm font-bold rounded-xl transition-all ${
                 activeTab === tab.id
                   ? "bg-brand-50 text-brand-700"
@@ -481,33 +496,42 @@ export function AdminDashboard({ initialContent, logoutAction }: { initialConten
       </aside>
 
       <main className="flex-1 flex flex-col h-full overflow-hidden relative">
-        <header className="bg-white border-b border-slate-200 px-8 py-5 flex items-center justify-between sticky top-0 z-10">
-          <h1 className="text-xl font-bold text-slate-800">
-            {TABS.find(t => t.id === activeTab)?.label}
-          </h1>
-          <div className="flex items-center gap-4">
+        <header className="bg-white border-b border-slate-200 px-4 md:px-8 py-5 flex items-center justify-between sticky top-0 z-10">
+          <div className="flex items-center gap-3">
+            <button
+              className="md:hidden text-slate-600 hover:text-slate-900"
+              onClick={() => setMobileMenuOpen(true)}
+            >
+              <Menu size={24} />
+            </button>
+            <h1 className="text-xl font-bold text-slate-800">
+              {TABS.find(t => t.id === activeTab)?.label}
+            </h1>
+          </div>
+          <div className="flex items-center gap-2 md:gap-4">
             {status === "success" && (
-              <span className="flex items-center gap-2 text-sm font-bold text-emerald-600 bg-emerald-50 px-3 py-1.5 rounded-lg">
+              <span className="hidden sm:flex items-center gap-2 text-sm font-bold text-emerald-600 bg-emerald-50 px-3 py-1.5 rounded-lg">
                 <CheckCircle2 size={16} /> Išsaugota
               </span>
             )}
             {status === "error" && (
-              <span className="flex items-center gap-2 text-sm font-bold text-red-600 bg-red-50 px-3 py-1.5 rounded-lg">
+              <span className="hidden sm:flex items-center gap-2 text-sm font-bold text-red-600 bg-red-50 px-3 py-1.5 rounded-lg">
                 <AlertCircle size={16} /> Klaida
               </span>
             )}
             <button
               onClick={handleSave}
               disabled={status === "saving"}
-              className="flex items-center gap-2 bg-brand-500 hover:bg-brand-600 text-white px-6 py-2.5 rounded-xl font-bold transition shadow-sm disabled:opacity-70"
+              className="flex items-center gap-2 bg-brand-500 hover:bg-brand-600 text-white px-4 md:px-6 py-2.5 rounded-xl font-bold transition shadow-sm disabled:opacity-70 text-sm"
             >
               {status === "saving" ? <Loader2 size={18} className="animate-spin" /> : <Save size={18} />}
-              {status === "saving" ? "Saugoma..." : "Išsaugoti pakeitimus"}
+              <span className="hidden sm:inline">{status === "saving" ? "Saugoma..." : "Išsaugoti pakeitimus"}</span>
+              <span className="sm:hidden">{status === "saving" ? "..." : "Saugoti"}</span>
             </button>
           </div>
         </header>
 
-        <div className="flex-1 overflow-y-auto p-8">
+        <div className="flex-1 overflow-y-auto p-4 md:p-8">
           <div className="max-w-4xl mx-auto">
             {renderTabContent()}
           </div>
