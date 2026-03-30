@@ -131,7 +131,7 @@ export default async function HomePage() {
                   <ArrowRight size={20} />
                 </a>
                 <a
-                  href="#paslaugos"
+                  href="#kainos"
                   className="inline-flex items-center justify-center rounded-2xl border-2 border-slate-200 bg-white px-8 py-5 text-lg font-bold text-slate-900 transition hover:border-brand-200 hover:bg-brand-50"
                 >
                   {content.hero.secondaryCta}
